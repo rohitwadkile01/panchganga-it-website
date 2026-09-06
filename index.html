@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panchganga IT Services and Solutions - affordable websites, Power BI dashboards, and Python & AI automation for small businesses.">
+  <meta name="keywords" content="Panchganga IT Services, website development, Power BI, Excel dashboard, Python automation, AI automation, Pune">
+  <meta name="author" content="Panchganga IT Services and Solutions">
+  <link rel="icon" type="image/png" href="logo.png">
+  <title>Panchganga IT Services and Solutions | Affordable IT Solutions</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --dark: #0f172a;
+      --text: #334155;
+      --muted: #64748b;
+      --light: #f8fafc;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(226,232,240,.8);
+    }
+
+    .nav-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: block;
+      object-fit: contain;
+    }
+
+    .brand span:last-child { line-height: 1.1; }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-cta {
+      padding: 10px 16px;
+      color: white !important;
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    .nav-cta:hover { background: var(--primary-dark); }
+
+    /* Hero */
+    .hero {
+      background:
+        radial-gradient(circle at 85% 15%, rgba(37,99,235,.14), transparent 28%),
+        radial-gradient(circle at 15% 85%, rgba(124,58,237,.10), transparent 25%),
+        var(--light);
+      padding: 92px 0 82px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid #bfdbfe;
+      border-radius: 999px;
+      color: var(--primary-dark);
+      background: #eff6ff;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 70px);
+      line-height: 1.03;
+      letter-spacing: -2.5px;
+      color: var(--dark);
+      margin-bottom: 22px;
+    }
+
+    h1 span { color: var(--primary); }
+
+    .hero p {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .trust-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 26px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .trust-bar .dot { color: #cbd5e1; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 13px 19px;
+      border-radius: 11px;
+      font-weight: 750;
+      font-size: 14px;
+      transition: .2s ease;
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--primary);
+      box-shadow: 0 8px 20px rgba(37,99,235,.22);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); background: var(--primary-dark); }
+
+    .btn-secondary {
+      color: var(--dark);
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { transform: translateY(-2px); border-color: #93c5fd; }
+
+    .hero-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 25px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .mini-logo {
+      width: 54px;
+      height: 54px;
+      display: block;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+
+    .status {
+      font-size: 12px;
+      color: var(--success);
+      font-weight: 700;
+      background: #f0fdf4;
+      padding: 7px 10px;
+      border-radius: 999px;
+    }
+
+    .hero-card h3 {
+      color: var(--dark);
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .hero-card > p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .service-mini {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 0;
+      border-top: 1px solid var(--border);
+      font-weight: 650;
+      color: var(--dark);
+    }
+
+    .service-mini-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      background: #eff6ff;
+      color: var(--primary);
+    }
+
+    /* Sections */
+    section { padding: 86px 0; }
+
+    .section-head {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 48px;
+    }
+
+    .section-head .label {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      margin-bottom: 9px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(30px, 4vw, 43px);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      color: var(--dark);
+      margin-bottom: 13px;
+    }
+
+    .section-head p { color: var(--muted); }
+
+    /* Services */
+    .services { background: var(--light); }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .service-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 5px 22px rgba(15,23,42,.04);
+      transition: .2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: #eff6ff;
+      color: var(--primary);
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      color: var(--dark);
+      font-size: 20px;
+      margin-bottom: 9px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: 850;
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+
+    .price small {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .features {
+      list-style: none;
+      display: grid;
+      gap: 9px;
+      font-size: 13px;
+    }
+
+    .features li::before {
+      content: "✓";
+      color: var(--success);
+      font-weight: 900;
+      margin-right: 8px;
+    }
+
+    .service-cta {
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    /* Who We Help */
+    .who-we-help { background: var(--light); }
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .who-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      text-align: center;
+      transition: .2s ease;
+    }
+
+    .who-card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(15,23,42,.06); }
+
+    .who-icon { font-size: 26px; margin-bottom: 12px; }
+
+    .who-card h3 { color: var(--dark); font-size: 15px; margin-bottom: 5px; }
+
+    .who-card p { color: var(--muted); font-size: 12.5px; }
+
+    /* Free Audit */
+    .audit-section {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+    }
+
+    .audit-section h2 { font-size: clamp(26px, 3.6vw, 36px); margin-bottom: 12px; }
+
+    .audit-section p { color: #cbd5e1; max-width: 520px; margin: 0 auto 26px; font-size: 15px; }
+
+    /* Portfolio */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .portfolio-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 5px 22px rgba(15,23,42,.04);
+      transition: .2s ease;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .mockup { height: 186px; background: #f1f5f9; }
+
+    .mockup-bar {
+      height: 26px;
+      background: white;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mockup-dot { width: 7px; height: 7px; border-radius: 50%; background: #cbd5e1; }
+
+    .mockup-body { padding: 14px; height: calc(100% - 26px); display: flex; flex-direction: column; gap: 10px; }
+
+    /* Restaurant demo mockup */
+    .mockup-nav-line { width: 55%; height: 6px; border-radius: 4px; background: var(--border); }
+
+    .mockup-hero {
+      flex: 1;
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px;
+      background: linear-gradient(135deg, #f59e0b, #ea580c);
+    }
+
+    .mockup-hero span {
+      color: white;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .mockup-menu-row { display: flex; gap: 6px; }
+    .mockup-menu-row div { flex: 1; height: 14px; border-radius: 4px; background: #e2e8f0; }
+
+    /* Dashboard demo mockup */
+    .mockup-kpis { display: flex; gap: 8px; }
+
+    .mockup-kpi {
+      flex: 1;
+      background: #eff6ff;
+      border-radius: 8px;
+      padding: 7px;
+      text-align: center;
+    }
+
+    .mockup-kpi span { display: block; font-weight: 800; font-size: 14px; color: var(--dark); }
+    .mockup-kpi small { font-size: 9px; color: var(--muted); }
+
+    .mockup-bars {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .mockup-bars div {
+      flex: 1;
+      background: var(--primary);
+      border-radius: 4px 4px 0 0;
+      opacity: .85;
+    }
+
+    /* Automation demo mockup */
+    .mockup-flow {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mockup-flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mockup-flow-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: #eff6ff;
+      font-size: 17px;
+    }
+
+    .mockup-flow-step small { font-size: 9px; color: var(--muted); font-weight: 600; }
+
+    .mockup-flow-arrow { color: var(--muted); font-size: 16px; font-weight: 700; }
+
+    .portfolio-body { padding: 22px; }
+
+    .portfolio-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      background: #eff6ff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 11px;
+    }
+
+    .portfolio-body h3 { color: var(--dark); font-size: 19px; margin-bottom: 3px; }
+    .portfolio-body .portfolio-sub { color: var(--primary-dark); font-size: 12px; font-weight: 700; margin-bottom: 9px; }
+    .portfolio-body p { color: var(--muted); font-size: 13.5px; }
+
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 15px;
+      font-weight: 750;
+      font-size: 13px;
+      color: var(--primary-dark);
+    }
+    .portfolio-link:hover { text-decoration: underline; }
+
+    /* Why us */
+    .why-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .why-box {
+      background: var(--dark);
+      color: white;
+      padding: 38px;
+      border-radius: 25px;
+    }
+
+    .why-box h2 {
+      font-size: 36px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .why-box p { color: #cbd5e1; }
+
+    .why-list { display: grid; gap: 23px; }
+
+    .why-item {
+      display: flex;
+      gap: 15px;
+    }
+
+    .why-number {
+      flex: 0 0 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--primary);
+      background: #eff6ff;
+      font-weight: 850;
+    }
+
+    .why-item h3 { color: var(--dark); font-size: 17px; margin-bottom: 3px; }
+    .why-item p { color: var(--muted); font-size: 14px; }
+
+    /* Process */
+    .process { background: var(--light); }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 23px;
+    }
+
+    .step-number {
+      font-size: 12px;
+      font-weight: 850;
+      color: var(--primary);
+      margin-bottom: 13px;
+    }
+
+    .step h3 { color: var(--dark); margin-bottom: 7px; font-size: 17px; }
+    .step p { color: var(--muted); font-size: 13px; }
+
+    /* CTA */
+    .cta-section { padding: 70px 0; }
+
+    .cta {
+      border-radius: 27px;
+      padding: 58px;
+      text-align: center;
+      color: white;
+      background: linear-gradient(135deg, #1d4ed8, #6d28d9);
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      line-height: 1.12;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      max-width: 620px;
+      margin: 0 auto 25px;
+      color: #dbeafe;
+    }
+
+    .btn-white {
+      color: var(--dark);
+      background: white;
+    }
+
+    .btn-white:hover { transform: translateY(-2px); }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .contact-card {
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: white;
+    }
+
+    .contact-card h3 { color: var(--dark); margin-bottom: 8px; }
+
+    .contact-card p { color: var(--muted); font-size: 14px; }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 17px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      word-break: break-word;
+    }
+
+    .contact-link:hover { text-decoration: underline; }
+
+    .service-area {
+      text-align: center;
+      margin-top: 26px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: #cbd5e1;
+      padding: 34px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .footer-brand { color: white; font-weight: 800; }
+    footer small { color: #94a3b8; }
+
+    /* WhatsApp floating button */
+    .whatsapp {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 999;
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #25D366;
+      color: white;
+      font-size: 23px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.18);
+      transition: .2s ease;
+    }
+
+    .whatsapp:hover { transform: scale(1.06); }
+
+    @media (max-width: 900px) {
+      .hero-grid, .why-grid { grid-template-columns: 1fr; }
+      .service-grid, .portfolio-grid, .who-grid { grid-template-columns: 1fr 1fr; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .hero { padding-top: 65px; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .nav-inner { min-height: 65px; }
+      .brand { font-size: 14px; }
+      .brand-mark { width: 36px; height: 36px; }
+      .hero { padding: 60px 0; }
+      h1 { letter-spacing: -1.5px; }
+      section { padding: 65px 0; }
+      .service-grid, .process-grid, .contact-grid, .portfolio-grid, .who-grid { grid-template-columns: 1fr; }
+      .why-grid { gap: 30px; }
+      .why-box { padding: 28px; }
+      .cta { padding: 40px 22px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#home">
+        <img class="brand-mark" src="logo.png" alt="Panchganga IT Services logo">
+        <span>
+          Panchganga IT
+          <small>Services & Solutions</small>
+        </span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#who-we-help">Solutions</a>
+        <a href="#portfolio">Our Work</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%20would%20like%20a%20free%20consultation.">Get Free Consultation</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="home">
+
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">● Affordable IT Solutions for Growing Businesses</div>
+          <h1>Grow Your Business with <span>Smart & Affordable IT.</span></h1>
+          <p>
+            Professional websites, business dashboards & automation solutions
+            for small businesses in Pune.
+          </p>
+
+          <div class="buttons">
+            <a class="btn btn-primary" href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%20would%20like%20a%20free%20consultation.">
+              Get Free Consultation →
+            </a>
+            <a class="btn btn-secondary" href="#portfolio">View Our Work</a>
+          </div>
+
+          <div class="trust-bar">
+            <span>📍 Serving Pune Businesses</span>
+            <span class="dot">•</span>
+            <span>⚡ Fast Delivery</span>
+            <span class="dot">•</span>
+            <span>💬 WhatsApp Support</span>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <img class="mini-logo" src="logo.png" alt="Panchganga IT Services logo">
+            <div class="status">● Available for Projects</div>
+          </div>
+
+          <h3>Simple. Reliable. Affordable.</h3>
+          <p>Digital solutions designed around your business needs—not unnecessary complexity.</p>
+
+          <div class="service-mini">
+            <div class="service-mini-icon">⌘</div>
+            Website Development
+          </div>
+          <div class="service-mini">
+            <div class="service-mini-icon">▥</div>
+            Power BI & Excel Dashboards
+          </div>
+          <div class="service-mini">
+            <div class="service-mini-icon">⚙</div>
+            Python & AI Automation
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">What We Do</div>
+          <h2>IT services built for real business needs.</h2>
+          <p>Start small, solve a real problem, and scale when your business is ready.</p>
+        </div>
+
+        <div class="service-grid">
+
+          <article class="service-card">
+            <div class="service-icon">🌐</div>
+            <h3>Business Website Development</h3>
+            <p>Professional, responsive websites that help customers discover and contact your business.</p>
+            <div class="price">₹4,999 <small>starting from</small></div>
+            <ul class="features">
+              <li>Mobile-friendly design</li>
+              <li>4–5 essential pages</li>
+              <li>WhatsApp & contact integration</li>
+              <li>Google Maps integration</li>
+            </ul>
+            <a class="btn btn-primary service-cta" href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%27m%20interested%20in%20a%20website%20for%20my%20business.">Get Website →</a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">📊</div>
+            <h3>Power BI & Excel Dashboards</h3>
+            <p>Clear business dashboards that turn spreadsheets and data into useful decisions.</p>
+            <div class="price">₹4,999 <small>starting from</small></div>
+            <ul class="features">
+              <li>Interactive dashboards</li>
+              <li>Sales & KPI reporting</li>
+              <li>Data cleaning & transformation</li>
+              <li>Customized business metrics</li>
+            </ul>
+            <a class="btn btn-primary service-cta" href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%27m%20interested%20in%20a%20Power%20BI%2FExcel%20dashboard.">Get Dashboard →</a>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon">🤖</div>
+            <h3>Python & AI Automation</h3>
+            <p>Automate repetitive work and create lightweight AI-powered tools for everyday operations.</p>
+            <div class="price">₹7,999 <small>starting from</small></div>
+            <ul class="features">
+              <li>Python automation scripts</li>
+              <li>Excel/report automation</li>
+              <li>AI-powered workflows</li>
+              <li>Custom business solutions</li>
+            </ul>
+            <a class="btn btn-primary service-cta" href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%27d%20like%20to%20automate%20some%20of%20my%20work.">Automate My Work →</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="who-we-help" class="who-we-help">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">Who We Help</div>
+          <h2>Built for businesses like yours.</h2>
+          <p>Whatever you run, there's a simple digital solution that helps you get more customers.</p>
+        </div>
+
+        <div class="who-grid">
+          <div class="who-card">
+            <div class="who-icon">🍽️</div>
+            <h3>Restaurants & Cafes</h3>
+            <p>Website • Menu • WhatsApp Orders</p>
+          </div>
+          <div class="who-card">
+            <div class="who-icon">💇</div>
+            <h3>Salons & Spas</h3>
+            <p>Website • Booking • WhatsApp Leads</p>
+          </div>
+          <div class="who-card">
+            <div class="who-icon">🏋️</div>
+            <h3>Gyms & Fitness</h3>
+            <p>Website • Membership Leads</p>
+          </div>
+          <div class="who-card">
+            <div class="who-icon">📚</div>
+            <h3>Coaching Classes</h3>
+            <p>Course Pages • Admission Enquiries</p>
+          </div>
+          <div class="who-card">
+            <div class="who-icon">🏥</div>
+            <h3>Clinics</h3>
+            <p>Doctor/Services • Appointment Enquiries</p>
+          </div>
+          <div class="who-card">
+            <div class="who-icon">🏠</div>
+            <h3>Real Estate</h3>
+            <p>Property Listings • Lead Forms</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">Our Work</div>
+          <h2>See what we can build for you.</h2>
+          <p>A few sample projects showing the kind of results a small business can expect.</p>
+        </div>
+
+        <div class="portfolio-grid">
+
+          <article class="portfolio-card">
+            <div class="mockup">
+              <div class="mockup-bar">
+                <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+              </div>
+              <div class="mockup-body">
+                <div class="mockup-nav-line"></div>
+                <div class="mockup-hero"><span>Spice Route Kitchen</span></div>
+                <div class="mockup-menu-row"><div></div><div></div><div></div></div>
+              </div>
+            </div>
+            <div class="portfolio-body">
+              <span class="portfolio-tag">SAMPLE PROJECT</span>
+              <h3>Spice Route Kitchen</h3>
+              <p class="portfolio-sub">Restaurant Website Demo</p>
+              <p>Online menu, WhatsApp booking, and a mobile-friendly design — the kind of site we build for restaurants.</p>
+              <a class="portfolio-link" href="demo-restaurant.html" target="_blank">View Demo →</a>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="mockup">
+              <div class="mockup-bar">
+                <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+              </div>
+              <div class="mockup-body">
+                <div class="mockup-kpis">
+                  <div class="mockup-kpi"><span>₹4.2L</span><small>REVENUE</small></div>
+                  <div class="mockup-kpi"><span>312</span><small>ORDERS</small></div>
+                </div>
+                <div class="mockup-bars">
+                  <div style="height:35%"></div>
+                  <div style="height:55%"></div>
+                  <div style="height:40%"></div>
+                  <div style="height:70%"></div>
+                  <div style="height:50%"></div>
+                  <div style="height:85%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="portfolio-body">
+              <span class="portfolio-tag">SAMPLE PRODUCT</span>
+              <h3>Vantage — Sales Dashboard</h3>
+              <p>A live Power BI–style report with real filters, trend charts, and drill-down visuals — built so owners get answers, not spreadsheets.</p>
+              <a class="portfolio-link" href="demo-dashboard.html" target="_blank">Open the live report →</a>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <div class="mockup">
+              <div class="mockup-bar">
+                <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+              </div>
+              <div class="mockup-body">
+                <div class="mockup-flow">
+                  <div class="mockup-flow-step">
+                    <div class="mockup-flow-icon" style="background:#0d1117;color:#34d399;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                    </div>
+                    <small>DATA</small>
+                  </div>
+                  <div class="mockup-flow-arrow">→</div>
+                  <div class="mockup-flow-step">
+                    <div class="mockup-flow-icon" style="background:#0d1117;color:#34d399;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 13.5a7.4 7.4 0 0 0 0-3l1.8-1.4-2-3.4-2.1.7a7.6 7.6 0 0 0-2.6-1.5L14.1 2h-4l-.4 2.9a7.6 7.6 0 0 0-2.6 1.5l-2.1-.7-2 3.4L4.6 10.5a7.4 7.4 0 0 0 0 3l-1.8 1.4 2 3.4 2.1-.7c.75.66 1.63 1.17 2.6 1.5l.4 2.9h4l.4-2.9a7.6 7.6 0 0 0 2.6-1.5l2.1.7 2-3.4-1.8-1.4Z"/></svg>
+                    </div>
+                    <small>RELAY</small>
+                  </div>
+                  <div class="mockup-flow-arrow">→</div>
+                  <div class="mockup-flow-step">
+                    <div class="mockup-flow-icon" style="background:#0d1117;color:#34d399;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <small>REPORT</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="portfolio-body">
+              <span class="portfolio-tag">SAMPLE PRODUCT</span>
+              <h3>Relay — Automated Reporting</h3>
+              <p>A packaged product with its own landing page and a working live demo — reads a daily export and turns it into a report automatically.</p>
+              <a class="portfolio-link" href="demo-automation.html" target="_blank">Open the live product →</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="why-us">
+      <div class="container why-grid">
+        <div class="why-box">
+          <h2>Technology without the unnecessary complexity.</h2>
+          <p>
+            We focus on practical solutions that are easy to understand, affordable
+            to maintain, and aligned with your business goals.
+          </p>
+        </div>
+
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-number">01</div>
+            <div>
+              <h3>Business-focused solutions</h3>
+              <p>Technology isn't the goal — solving a real business problem is.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-number">02</div>
+            <div>
+              <h3>WhatsApp-first support</h3>
+              <p>No complicated ticket systems — just message us directly and get a reply.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-number">03</div>
+            <div>
+              <h3>Affordable for small businesses</h3>
+              <p>Get useful digital solutions without big-agency pricing.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-number">04</div>
+            <div>
+              <h3>After-launch support</h3>
+              <p>We don't disappear after delivery — basic support continues after launch.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="process">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">How It Works</div>
+          <h2>From idea to working solution.</h2>
+          <p>A simple four-step process keeps every project clear.</p>
+        </div>
+
+        <div class="process-grid">
+          <div class="step">
+            <div class="step-number">STEP 01</div>
+            <h3>Free Consultation</h3>
+            <p>We understand your business and what you actually need.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">STEP 02</div>
+            <h3>Clear Quote</h3>
+            <p>Scope and price, agreed upfront — no surprises later.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">STEP 03</div>
+            <h3>Build</h3>
+            <p>We develop, test, and refine the solution with your feedback.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">STEP 04</div>
+            <h3>Launch & Support</h3>
+            <p>We deploy it live and stay around for basic support after.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="audit-section">
+      <div class="container">
+        <h2>Not sure where your website stands?</h2>
+        <p>Get a free, no-obligation audit — we'll tell you what's working, what isn't, and what to fix first.</p>
+        <a class="btn btn-white" href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%20would%20like%20a%20free%20website%20audit%20for%20my%20business.">
+          Get a Free Website Audit →
+        </a>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta">
+          <h2>Let's build something that helps your business grow.</h2>
+          <p>Have a business idea or problem? Tell us what you need and we'll suggest a practical solution.</p>
+          <a class="btn btn-white" href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%20have%20an%20IT%20requirement.">
+            Start a Conversation →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">Contact</div>
+          <h2>Let's build something useful.</h2>
+          <p>Reach out for a website, dashboard, automation, or custom IT requirement.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Email</h3>
+            <p>For project enquiries and business requirements.</p>
+            <a class="contact-link" href="mailto:panchgangaithub@gmail.com">
+              ✉ panchgangaithub@gmail.com
+            </a>
+          </div>
+
+          <div class="contact-card">
+            <h3>WhatsApp</h3>
+            <p>For quick questions, requirements, and quotations.</p>
+            <a class="contact-link" href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%20would%20like%20a%20quotation.">
+              ☎ +91 93223 21364
+            </a>
+          </div>
+        </div>
+
+        <p class="service-area">📍 Service Area: Wagholi • Kharadi • Viman Nagar • Hadapsar • Pune</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">Panchganga IT Services and Solutions</div>
+      <small>© 2026 Panchganga IT Services and Solutions. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <a class="whatsapp" aria-label="Chat on WhatsApp"
+     href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%20would%20like%20to%20discuss%20a%20project.">
+    ☎
+  </a>
+
+</body>
+</html>

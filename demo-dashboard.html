@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vantage — Sales Performance Report · Sample Project by Panchganga IT Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf9f8; --canvas:#f3f2f1; --card:#ffffff; --border:#e1dfdd;
+    --text:#201f1e; --muted:#605e5c; --primary:#2564eb; --primary-light:#e8f0fe;
+    --accent:#f2994a; --success:#107c10; --danger:#d13438;
+    --c1:#2564eb; --c2:#2aa1af; --c3:#f2994a; --c4:#8764b8;
+    --radius:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:Inter,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:13.5px;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;}
+  svg{display:block;}
+
+  .tag-bar{background:#111827;color:#cbd5e1;padding:9px 0;font-size:12.5px;}
+  .tag-bar-inner{max-width:1280px;margin:auto;padding:0 20px;display:flex;justify-content:space-between;}
+  .tag-bar a{color:#93c5fd;font-weight:600;}
+
+  .report-shell{max-width:1280px;margin:auto;}
+
+  /* Header */
+  .report-header{background:var(--card);border-bottom:1px solid var(--border);padding:16px 20px;display:flex;justify-content:space-between;align-items:center;}
+  .title-block h1{font-size:18px;font-weight:800;letter-spacing:-.2px;}
+  .meta{color:var(--muted);font-size:12px;margin-top:4px;display:flex;align-items:center;}
+  .live-dot{width:7px;height:7px;border-radius:50%;background:var(--success);display:inline-block;margin-right:7px;animation:pulse 2s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(16,124,16,.45)}70%{box-shadow:0 0 0 6px rgba(16,124,16,0)}100%{box-shadow:0 0 0 0 rgba(16,124,16,0)}}
+  .header-actions{display:flex;gap:8px;}
+  .icon-btn{width:32px;height:32px;border:1px solid var(--border);background:var(--card);border-radius:6px;display:grid;place-items:center;cursor:pointer;color:var(--muted);font-size:14px;}
+  .icon-btn:hover{background:var(--canvas);}
+  .icon-btn svg{width:16px;height:16px;}
+  .icon-btn.spinning svg{animation:spin .6s linear;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  /* Body layout */
+  .report-body{display:flex;align-items:flex-start;}
+  .canvas{flex:1;min-width:0;background:var(--canvas);padding:16px;}
+  .filter-pane{width:236px;flex-shrink:0;background:var(--card);border-left:1px solid var(--border);padding:18px;min-height:640px;}
+  .filter-pane-head{font-size:13px;font-weight:800;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px;}
+  .filter-pane-head svg{width:15px;height:15px;color:var(--muted);}
+  .filter-group{margin-bottom:22px;}
+  .filter-group-head{font-size:11.5px;font-weight:700;color:var(--muted);margin-bottom:10px;}
+  .filter-options{display:flex;flex-direction:column;gap:6px;}
+  .filter-pill{text-align:left;padding:8px 11px;border:1px solid var(--border);border-radius:6px;background:var(--card);font-size:12.5px;font-weight:600;color:var(--text);cursor:pointer;}
+  .filter-pill:hover{background:var(--canvas);}
+  .filter-pill.active{background:var(--primary);border-color:var(--primary);color:white;}
+  .filter-note{font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:6px;}
+
+  /* KPI row */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px;}
+  .kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:15px;}
+  .kpi .label{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:8px;}
+  .kpi .value{font-size:21px;font-weight:800;letter-spacing:-.3px;}
+  .kpi .delta{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;margin-top:6px;}
+  .up{color:var(--success);} .down{color:var(--danger);}
+  .kpi .spark{margin-top:10px;width:100%;height:26px;}
+
+  /* Visual rows */
+  .visual-row{display:grid;gap:12px;margin-bottom:12px;}
+  .visual-row.trend-row{grid-template-columns:2fr 1fr;}
+  .visual-row.detail-row{grid-template-columns:1fr 2fr;}
+  .visual{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;}
+  .visual-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;}
+  .visual-head h3{font-size:13px;font-weight:800;}
+  .visual-head span{font-size:11.5px;color:var(--muted);}
+
+  #trendChart{width:100%;height:210px;}
+  .area-fill{fill:url(#areaGrad);}
+  .trend-line{fill:none;stroke:var(--primary);stroke-width:2.2;}
+  .trend-dot{fill:var(--card);stroke:var(--primary);stroke-width:2;}
+  .grid-h{stroke:var(--border);stroke-width:1;}
+  .axis-label{fill:var(--muted);font-size:9.5px;font-family:Inter;}
+
+  .region-list{display:flex;flex-direction:column;gap:14px;}
+  .region-row .region-top{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;margin-bottom:6px;}
+  .region-track{height:8px;border-radius:4px;background:var(--canvas);overflow:hidden;}
+  .region-fill{height:100%;border-radius:4px;background:#c8c6c4;}
+  .region-fill.highlight{background:var(--primary);}
+
+  .donut-wrap{display:flex;align-items:center;gap:18px;}
+  #donutChart{width:130px;height:130px;flex-shrink:0;}
+  .legend{display:flex;flex-direction:column;gap:9px;flex:1;}
+  .legend-row{display:flex;align-items:center;gap:8px;font-size:12px;}
+  .legend-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
+  .legend-row .name{flex:1;color:var(--text);font-weight:600;}
+  .legend-row .pct{color:var(--muted);font-weight:600;}
+
+  table{width:100%;border-collapse:collapse;}
+  th{text-align:left;color:var(--muted);font-weight:700;font-size:11.5px;padding-bottom:9px;border-bottom:1px solid var(--border);}
+  th.num, td.num{text-align:right;}
+  td{padding:11px 0;border-bottom:1px solid var(--border);font-size:12.5px;vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  .bar-cell{position:relative;min-width:150px;}
+  .bar-cell .bar-bg{position:absolute;left:0;top:50%;transform:translateY(-50%);height:18px;background:var(--primary-light);border-radius:4px;z-index:0;}
+  .bar-cell .bar-text{position:relative;z-index:1;padding-left:8px;font-weight:600;}
+
+  .placeholder-card{background:var(--card);border:1px dashed var(--border);border-radius:var(--radius);padding:70px 24px;text-align:center;color:var(--muted);}
+  .placeholder-card svg{width:32px;height:32px;margin:0 auto 14px;color:#c7cbd3;}
+  .placeholder-card h3{color:var(--text);font-size:15px;margin-bottom:6px;}
+  .placeholder-card p{font-size:13px;max-width:320px;margin:0 auto;}
+
+  /* Page tabs */
+  .page-tabs{background:var(--card);border-top:1px solid var(--border);padding:8px 20px;display:flex;gap:4px;}
+  .page-tab{padding:8px 14px;border-radius:5px;font-size:12.5px;font-weight:700;color:var(--muted);cursor:pointer;border:none;background:transparent;}
+  .page-tab:hover{background:var(--canvas);}
+  .page-tab.active{background:var(--primary-light);color:var(--primary);}
+
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:white;padding:10px 18px;border-radius:8px;font-size:12.5px;font-weight:600;opacity:0;transition:.25s ease;pointer-events:none;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  @media(max-width:900px){
+    .report-body{flex-direction:column-reverse;}
+    .filter-pane{width:100%;border-left:none;border-top:1px solid var(--border);min-height:auto;}
+    .kpi-row{grid-template-columns:1fr 1fr;}
+    .visual-row.trend-row,.visual-row.detail-row{grid-template-columns:1fr;}
+    .donut-wrap{flex-direction:column;align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<div class="tag-bar">
+  <div class="tag-bar-inner">
+    <span>Sample project by Panchganga IT Services</span>
+    <a href="index.html">← Back to portfolio</a>
+  </div>
+</div>
+
+<div class="report-shell">
+  <header class="report-header">
+    <div class="title-block">
+      <h1>Vantage — Sales Performance</h1>
+      <div class="meta"><span class="live-dot"></span>Live report · <span id="refreshedAt">last refreshed just now</span></div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="refreshBtn" title="Refresh data">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+      </button>
+      <button class="icon-btn" id="exportBtn" title="Export report">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="report-body">
+    <main class="canvas">
+
+      <div id="overviewPage">
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="label">Revenue</div>
+            <div class="value" id="kpiRevenue">—</div>
+            <div class="delta" id="kpiRevenueDelta"></div>
+            <svg class="spark" id="sparkRevenue" viewBox="0 0 100 30" preserveAspectRatio="none"></svg>
+          </div>
+          <div class="kpi">
+            <div class="label">Orders</div>
+            <div class="value" id="kpiOrders">—</div>
+            <div class="delta" id="kpiOrdersDelta"></div>
+            <svg class="spark" id="sparkOrders" viewBox="0 0 100 30" preserveAspectRatio="none"></svg>
+          </div>
+          <div class="kpi">
+            <div class="label">Avg. order value</div>
+            <div class="value" id="kpiAov">—</div>
+            <div class="delta" id="kpiAovDelta"></div>
+            <svg class="spark" id="sparkAov" viewBox="0 0 100 30" preserveAspectRatio="none"></svg>
+          </div>
+          <div class="kpi">
+            <div class="label">New customers</div>
+            <div class="value" id="kpiCustomers">—</div>
+            <div class="delta" id="kpiCustomersDelta"></div>
+            <svg class="spark" id="sparkCustomers" viewBox="0 0 100 30" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+
+        <div class="visual-row trend-row">
+          <div class="visual">
+            <div class="visual-head"><h3 id="trendTitle">Revenue trend</h3><span>₹, by month</span></div>
+            <svg id="trendChart" viewBox="0 0 640 210"></svg>
+          </div>
+          <div class="visual">
+            <div class="visual-head"><h3>Revenue by region</h3><span id="regionRangeLabel"></span></div>
+            <div class="region-list" id="regionList"></div>
+          </div>
+        </div>
+
+        <div class="visual-row detail-row">
+          <div class="visual">
+            <div class="visual-head"><h3>Revenue by service</h3></div>
+            <div class="donut-wrap">
+              <svg id="donutChart" viewBox="0 0 140 140"></svg>
+              <div class="legend" id="donutLegend"></div>
+            </div>
+          </div>
+          <div class="visual">
+            <div class="visual-head"><h3>Service performance</h3><span>sorted by revenue</span></div>
+            <table>
+              <thead><tr><th>Service</th><th class="num">Revenue</th><th class="num">Orders</th><th>Share</th></tr></thead>
+              <tbody id="serviceTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="placeholderPage" style="display:none">
+        <div class="placeholder-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+          <h3 id="placeholderTitle">Customer Insights</h3>
+          <p>This report page is included in the full Vantage build — this demo focuses on the Sales Overview page.</p>
+        </div>
+      </div>
+
+    </main>
+
+    <aside class="filter-pane">
+      <div class="filter-pane-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+        Filters
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-head">REGION</div>
+        <div class="filter-options" id="regionFilters">
+          <button class="filter-pill active" data-region="all">All Regions</button>
+          <button class="filter-pill" data-region="pune">Pune</button>
+          <button class="filter-pill" data-region="mumbai">Mumbai</button>
+          <button class="filter-pill" data-region="bangalore">Bangalore</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-group-head">TIME RANGE</div>
+        <div class="filter-options" id="rangeFilters">
+          <button class="filter-pill" data-range="3">Last 3 Months</button>
+          <button class="filter-pill active" data-range="6">Last 6 Months</button>
+        </div>
+      </div>
+      <p class="filter-note">Filters apply across every visual on this page — try switching region or time range.</p>
+    </aside>
+  </div>
+
+  <div class="page-tabs">
+    <button class="page-tab active" data-page="overview">Sales Overview</button>
+    <button class="page-tab" data-page="customers">Customer Insights</button>
+    <button class="page-tab" data-page="products">Product Mix</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">Report refreshed</div>
+
+<script>
+/* ---------- Dataset ---------- */
+const months = ['Apr','May','Jun','Jul','Aug','Sep'];
+const baseRevenue = [320000,348000,335000,372000,398000,418600];
+const baseOrders  = [268,289,276,301,318,312];
+const baseNew     = [34,37,35,40,44,47];
+
+const regionMultiplier = { all:1, pune:0.45, mumbai:0.33, bangalore:0.22 };
+const regionNames = { pune:'Pune', mumbai:'Mumbai', bangalore:'Bangalore' };
+
+const services = [
+  { name:'Website Development', share:0.30, aov:7000,  color:'var(--c1)' },
+  { name:'Power BI Dashboard',  share:0.26, aov:6500,  color:'var(--c2)' },
+  { name:'Python Automation',   share:0.24, aov:9200,  color:'var(--c3)' },
+  { name:'Maintenance',         share:0.20, aov:1100,  color:'var(--c4)' },
+];
+
+let currentRegion = 'all';
+let currentRange = '6';
+
+/* ---------- Helpers ---------- */
+function series(regionKey){
+  const rm = regionMultiplier[regionKey];
+  return months.map((m,i)=>({
+    month:m,
+    revenue: Math.round(baseRevenue[i]*rm),
+    orders: Math.max(1, Math.round(baseOrders[i]*rm)),
+    newCustomers: Math.max(0, Math.round(baseNew[i]*rm)),
+  }));
+}
+function rangeIdx(rangeKey){ return rangeKey==='3' ? [3,4,5] : [0,1,2,3,4,5]; }
+function sumField(s, idx, field){ return idx.reduce((t,i)=>t+s[i][field],0); }
+function pct(curr, prev){ return prev===0 ? 0 : ((curr-prev)/prev)*100; }
+function fmtINR(n){ return '₹' + Math.round(n).toLocaleString('en-IN'); }
+function fmtLakh(n){ return Math.abs(n)>=100000 ? '₹'+(n/100000).toFixed(2)+'L' : fmtINR(n); }
+function deltaHTML(value, label){
+  const up = value >= 0;
+  const arrow = up
+    ? '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>'
+    : '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>';
+  return `<span class="${up?'up':'down'}">${arrow} ${up?'+':''}${value.toFixed(1)}% ${label}</span>`;
+}
+function sparkline(values){
+  const min = Math.min(...values), max = Math.max(...values);
+  const span = (max-min) || 1;
+  const pts = values.map((v,i)=>{
+    const x = (i/(values.length-1))*100;
+    const y = 26 - ((v-min)/span)*22 - 2;
+    return `${x},${y}`;
+  });
+  const line = pts.join(' ');
+  const area = `0,30 ${line} 100,30`;
+  return `<polygon points="${area}" fill="var(--primary-light)"></polygon>
+          <polyline points="${line}" fill="none" stroke="var(--primary)" stroke-width="2"></polyline>`;
+}
+
+/* ---------- Render ---------- */
+function render(){
+  const s = series(currentRegion);
+  const idx = rangeIdx(currentRange);
+  const deltaCurrIdx = [3,4,5], deltaPrevIdx = [0,1,2];
+  const deltaLabel = currentRange==='3' ? 'vs previous 3 mo' : 'H2 vs H1 trend';
+
+  const revCurr = sumField(s, idx, 'revenue');
+  const ordCurr = sumField(s, idx, 'orders');
+  const ncCurr  = sumField(s, idx, 'newCustomers');
+  const aovCurr = revCurr / ordCurr;
+
+  const revD = pct(sumField(s,deltaCurrIdx,'revenue'), sumField(s,deltaPrevIdx,'revenue'));
+  const ordD = pct(sumField(s,deltaCurrIdx,'orders'), sumField(s,deltaPrevIdx,'orders'));
+  const ncD  = pct(sumField(s,deltaCurrIdx,'newCustomers'), sumField(s,deltaPrevIdx,'newCustomers'));
+  const aovCurrD = sumField(s,deltaCurrIdx,'revenue')/sumField(s,deltaCurrIdx,'orders');
+  const aovPrevD = sumField(s,deltaPrevIdx,'revenue')/sumField(s,deltaPrevIdx,'orders');
+  const aovD = pct(aovCurrD, aovPrevD);
+
+  document.getElementById('kpiRevenue').textContent = fmtLakh(revCurr);
+  document.getElementById('kpiRevenueDelta').innerHTML = deltaHTML(revD, deltaLabel);
+  document.getElementById('kpiOrders').textContent = ordCurr.toLocaleString('en-IN');
+  document.getElementById('kpiOrdersDelta').innerHTML = deltaHTML(ordD, deltaLabel);
+  document.getElementById('kpiAov').textContent = fmtINR(aovCurr);
+  document.getElementById('kpiAovDelta').innerHTML = deltaHTML(aovD, deltaLabel);
+  document.getElementById('kpiCustomers').textContent = ncCurr.toLocaleString('en-IN');
+  document.getElementById('kpiCustomersDelta').innerHTML = deltaHTML(ncD, deltaLabel);
+
+  document.getElementById('sparkRevenue').innerHTML = sparkline(s.map(m=>m.revenue));
+  document.getElementById('sparkOrders').innerHTML = sparkline(s.map(m=>m.orders));
+  document.getElementById('sparkAov').innerHTML = sparkline(s.map(m=>m.revenue/m.orders));
+  document.getElementById('sparkCustomers').innerHTML = sparkline(s.map(m=>m.newCustomers));
+
+  /* Trend chart */
+  document.getElementById('trendTitle').textContent = currentRange==='3' ? 'Revenue trend (last 3 months)' : 'Revenue trend (last 6 months)';
+  const trendData = idx.map(i => s[i]);
+  const w = 640, h = 210, padL = 46, padB = 26, padT = 14;
+  const maxV = Math.max(...trendData.map(d=>d.revenue));
+  const plotW = w - padL - 10, plotH = h - padT - padB;
+  const stepX = plotW / (trendData.length - 1 || 1);
+  const points = trendData.map((d,i)=>{
+    const x = padL + i*stepX;
+    const y = padT + plotH - (d.revenue/maxV)*plotH;
+    return {x,y,d};
+  });
+  const linePts = points.map(p=>`${p.x},${p.y}`).join(' ');
+  const areaPts = `${padL},${padT+plotH} ${linePts} ${padL+plotW},${padT+plotH}`;
+  const gridLines = [0,1,2,3].map(i=>{
+    const y = padT + (plotH/3)*i;
+    const val = maxV - (maxV/3)*i;
+    return `<line class="grid-h" x1="${padL}" y1="${y}" x2="${w-10}" y2="${y}"></line>
+            <text class="axis-label" x="${padL-8}" y="${y+3}" text-anchor="end">${fmtLakh(val)}</text>`;
+  }).join('');
+  const xLabels = points.map(p=>`<text class="axis-label" x="${p.x}" y="${h-6}" text-anchor="middle">${p.d.month}</text>`).join('');
+  const dots = points.map(p=>`<circle class="trend-dot" cx="${p.x}" cy="${p.y}" r="3.5"><title>${p.d.month}: ${fmtINR(p.d.revenue)}</title></circle>`).join('');
+  document.getElementById('trendChart').innerHTML = `
+    <defs><linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="var(--primary)" stop-opacity="0"/>
+    </linearGradient></defs>
+    ${gridLines}
+    <polygon class="area-fill" points="${areaPts}"></polygon>
+    <polyline class="trend-line" points="${linePts}"></polyline>
+    ${dots}${xLabels}`;
+
+  /* Region breakdown (always all regions, highlight selection) */
+  document.getElementById('regionRangeLabel').textContent = currentRange==='3' ? 'last 3 months' : 'last 6 months';
+  const regionTotals = Object.keys(regionNames).map(key=>{
+    const rm = regionMultiplier[key];
+    const total = idx.reduce((t,i)=>t+baseRevenue[i]*rm,0);
+    return { key, name:regionNames[key], total };
+  }).sort((a,b)=>b.total-a.total);
+  const maxRegion = Math.max(...regionTotals.map(r=>r.total));
+  document.getElementById('regionList').innerHTML = regionTotals.map(r=>{
+    const pctW = (r.total/maxRegion)*100;
+    const isHi = currentRegion==='all' || currentRegion===r.key;
+    return `
+      <div class="region-row">
+        <div class="region-top"><span>${r.name}</span><span>${fmtLakh(r.total)}</span></div>
+        <div class="region-track"><div class="region-fill ${isHi?'highlight':''}" style="width:${pctW}%"></div></div>
+      </div>`;
+  }).join('');
+
+  /* Donut + legend + table */
+  const svcRows = services.map(sv=>{
+    const revenue = revCurr*sv.share;
+    const orders = Math.round(revenue/sv.aov);
+    return {...sv, revenue, orders};
+  }).sort((a,b)=>b.revenue-a.revenue);
+
+  const r = 55, cx=70, cy=70, sw=18;
+  const circ = 2*Math.PI*r;
+  let offsetAcc = 0;
+  const arcs = svcRows.map(sv=>{
+    const len = sv.share*circ;
+    const arc = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${sv.color}" stroke-width="${sw}"
+      stroke-dasharray="${len} ${circ-len}" stroke-dashoffset="${-offsetAcc}" transform="rotate(-90 ${cx} ${cy})"></circle>`;
+    offsetAcc += len;
+    return arc;
+  }).join('');
+  document.getElementById('donutChart').innerHTML = `
+    ${arcs}
+    <text x="${cx}" y="${cy-3}" text-anchor="middle" font-size="15" font-weight="800" fill="var(--text)">${fmtLakh(revCurr)}</text>
+    <text x="${cx}" y="${cy+13}" text-anchor="middle" font-size="9" fill="var(--muted)">total revenue</text>`;
+
+  document.getElementById('donutLegend').innerHTML = svcRows.map(sv=>`
+    <div class="legend-row">
+      <span class="legend-dot" style="background:${sv.color}"></span>
+      <span class="name">${sv.name}</span>
+      <span class="pct">${Math.round(sv.share*100)}%</span>
+    </div>`).join('');
+
+  const maxSvcRevenue = Math.max(...svcRows.map(sv=>sv.revenue));
+  document.getElementById('serviceTable').innerHTML = svcRows.map(sv=>{
+    const barW = (sv.revenue/maxSvcRevenue)*100;
+    return `
+      <tr>
+        <td class="bar-cell">
+          <span class="bar-bg" style="width:${barW}%"></span>
+          <span class="bar-text">${sv.name}</span>
+        </td>
+        <td class="num">${fmtINR(sv.revenue)}</td>
+        <td class="num">${sv.orders}</td>
+        <td>${Math.round(sv.share*100)}%</td>
+      </tr>`;
+  }).join('');
+}
+
+/* ---------- Interactions ---------- */
+document.querySelectorAll('#regionFilters .filter-pill').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#regionFilters .filter-pill').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentRegion = btn.dataset.region;
+    render();
+  });
+});
+document.querySelectorAll('#rangeFilters .filter-pill').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#rangeFilters .filter-pill').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentRange = btn.dataset.range;
+    render();
+  });
+});
+
+const pageMeta = {
+  customers: 'Customer Insights',
+  products: 'Product Mix',
+};
+document.querySelectorAll('.page-tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.page-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const page = tab.dataset.page;
+    if(page==='overview'){
+      document.getElementById('overviewPage').style.display = 'block';
+      document.getElementById('placeholderPage').style.display = 'none';
+    } else {
+      document.getElementById('overviewPage').style.display = 'none';
+      document.getElementById('placeholderPage').style.display = 'block';
+      document.getElementById('placeholderTitle').textContent = pageMeta[page];
+    }
+  });
+});
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 1800);
+}
+document.getElementById('refreshBtn').addEventListener('click', function(){
+  this.classList.add('spinning');
+  document.getElementById('refreshedAt').textContent = 'last refreshed just now';
+  setTimeout(()=>this.classList.remove('spinning'), 600);
+  render();
+  showToast('Report refreshed');
+});
+document.getElementById('exportBtn').addEventListener('click', ()=> showToast('Export ready — ' + 'sales-overview.pdf'));
+
+render();
+</script>
+
+</body>
+</html>

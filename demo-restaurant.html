@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spice Route Kitchen — Sample Project by Panchganga IT Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1c1210; --surface:#251a16; --gold:#d4a24c; --brick:#a3462e;
+    --cream:#f4e9da; --muted:#b6a291; --line:#3a2c25;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--cream);font-family:Inter,sans-serif;line-height:1.6;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{width:min(880px,90%);margin:auto;}
+
+  .tag-bar{background:var(--surface);border-bottom:1px solid var(--line);padding:12px 0;font-size:13px;color:var(--muted);}
+  .tag-bar .wrap{display:flex;justify-content:space-between;align-items:center;}
+  .tag-bar a.back{color:var(--gold);font-weight:600;}
+
+  header{padding:110px 0 90px;text-align:center;background:radial-gradient(circle at 50% 0%, rgba(212,162,76,.14), transparent 55%);}
+  .kicker{color:var(--gold);letter-spacing:.5px;font-size:14px;margin-bottom:18px;}
+  h1{font-family:Fraunces,serif;font-weight:700;font-size:clamp(40px,7vw,74px);line-height:1.05;margin-bottom:20px;}
+  header p{color:var(--muted);max-width:480px;margin:0 auto 30px;font-size:16px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:3px;font-weight:600;font-size:14px;}
+  .btn-gold{background:var(--gold);color:#1c1210;}
+
+  section{padding:80px 0;border-top:1px solid var(--line);}
+  .head{text-align:center;margin-bottom:50px;}
+  .head .kicker{margin-bottom:10px;}
+  .head h2{font-family:Fraunces,serif;font-size:clamp(28px,4vw,40px);}
+
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 60px;}
+  .menu-item{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px dashed var(--line);}
+  .menu-item h3{font-family:Fraunces,serif;font-size:18px;font-weight:500;margin-bottom:4px;}
+  .menu-item p{color:var(--muted);font-size:13px;}
+  .menu-item .price{font-family:Fraunces,serif;color:var(--gold);font-size:17px;white-space:nowrap;}
+
+  .about{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center;}
+  .about-visual{aspect-ratio:4/5;border-radius:6px;background:linear-gradient(160deg,var(--brick),#5c231a);display:flex;align-items:center;justify-content:center;font-family:Fraunces,serif;font-size:22px;color:var(--cream);text-align:center;padding:30px;}
+  .about h2{font-family:Fraunces,serif;font-size:32px;margin-bottom:16px;}
+  .about p{color:var(--muted);margin-bottom:14px;}
+
+  .hours{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .hours div{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px;text-align:center;}
+  .hours strong{display:block;font-family:Fraunces,serif;font-size:16px;margin-bottom:6px;color:var(--gold);}
+  .hours span{color:var(--muted);font-size:13px;}
+
+  footer{padding:60px 0;text-align:center;color:var(--muted);font-size:13px;}
+  footer .btn-gold{margin-bottom:20px;}
+
+  .whatsapp{position:fixed;right:22px;bottom:22px;width:54px;height:54px;border-radius:50%;background:#25D366;color:white;display:grid;place-items:center;font-size:22px;box-shadow:0 10px 25px rgba(0,0,0,.3);}
+
+  @media(max-width:720px){ .menu-grid,.about,.hours{grid-template-columns:1fr;} .about-visual{aspect-ratio:16/9;} }
+</style>
+</head>
+<body>
+
+<div class="tag-bar">
+  <div class="wrap">
+    <span>Sample project by Panchganga IT Services</span>
+    <a class="back" href="index.html">← Back to portfolio</a>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">EST. PUNE</div>
+    <h1>Spice Route<br>Kitchen</h1>
+    <p>Slow-cooked Indian classics, fresh bread from the tandoor, and a menu built around what's in season.</p>
+    <a class="btn btn-gold" href="https://wa.me/919322321364?text=Hi%2C%20I%27d%20like%20to%20book%20a%20table.">Reserve on WhatsApp</a>
+  </div>
+</header>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker">MENU</div>
+      <h2>A few house favourites</h2>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item"><div><h3>Butter Chicken</h3><p>Tomato, cream, charcoal-smoked</p></div><span class="price">₹340</span></div>
+      <div class="menu-item"><div><h3>Dal Makhani</h3><p>Slow-cooked overnight, whole spices</p></div><span class="price">₹260</span></div>
+      <div class="menu-item"><div><h3>Tandoori Platter</h3><p>Seekh, tikka, and paneer skewers</p></div><span class="price">₹420</span></div>
+      <div class="menu-item"><div><h3>Rogan Josh</h3><p>Kashmiri chili, yoghurt, slow braise</p></div><span class="price">₹380</span></div>
+      <div class="menu-item"><div><h3>Garlic Naan</h3><p>Fresh from the tandoor</p></div><span class="price">₹90</span></div>
+      <div class="menu-item"><div><h3>Gulab Jamun</h3><p>Warm, served with rabri</p></div><span class="price">₹140</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="about-visual">"Every dish tells<br>a story of home."</div>
+    <div>
+      <div class="kicker">OUR STORY</div>
+      <h2>Family recipes, cooked the slow way</h2>
+      <p>Spice Route Kitchen started as a weekend supper club before opening its doors on FC Road. Every recipe on this menu has been in the family for at least two generations.</p>
+      <p>We source vegetables daily from the Pune wholesale market and grind our own spice blends every morning.</p>
+    </div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker">VISIT US</div>
+      <h2>Open seven days a week</h2>
+    </div>
+    <div class="hours">
+      <div><strong>Mon – Fri</strong><span>12:00 PM – 3:30 PM · 7:00 PM – 11:00 PM</span></div>
+      <div><strong>Sat – Sun</strong><span>12:00 PM – 11:00 PM</span></div>
+      <div><strong>FC Road, Pune</strong><span>Free parking after 7 PM</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="btn btn-gold" href="https://wa.me/919322321364?text=Hi%2C%20I%27d%20like%20to%20book%20a%20table.">Book a Table on WhatsApp</a>
+    <p>This is a sample project built by Panchganga IT Services and Solutions to demonstrate our website work.</p>
+  </div>
+</footer>
+
+<a class="whatsapp" href="https://wa.me/919322321364" aria-label="WhatsApp">☎</a>
+
+</body>
+</html>
