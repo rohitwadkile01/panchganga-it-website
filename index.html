@@ -641,16 +641,135 @@
     .review-author h4 { color: var(--dark); font-size: 15px; line-height: 1.2; }
     .review-author small { color: var(--muted); font-size: 12.5px; }
 
-    .reviews-cta {
-      text-align: center;
-      margin-top: 34px;
+    /* Review submission form */
+    .review-form-wrap {
+      max-width: 720px;
+      margin: 48px auto 0;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 36px;
     }
 
-    .reviews-cta p {
+    .review-form-wrap h3 {
+      color: var(--dark);
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .review-form-wrap > p {
       color: var(--muted);
       font-size: 14px;
-      margin-bottom: 14px;
+      text-align: center;
+      margin-bottom: 26px;
     }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group { margin-bottom: 16px; }
+
+    .form-group label {
+      display: block;
+      color: var(--dark);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .form-group input[type="text"],
+    .form-group textarea {
+      width: 100%;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--dark);
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      transition: .2s ease;
+    }
+
+    .form-group textarea { min-height: 120px; resize: vertical; }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+    }
+
+    /* Clickable star rating */
+    .star-rating {
+      display: inline-flex;
+      flex-direction: row-reverse;
+      gap: 4px;
+    }
+
+    .star-rating input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .star-rating label {
+      font-size: 32px;
+      line-height: 1;
+      color: #cbd5e1;
+      cursor: pointer;
+      margin: 0;
+      transition: color .15s ease, transform .15s ease;
+    }
+
+    .star-rating label:hover,
+    .star-rating label:hover ~ label,
+    .star-rating input:checked ~ label { color: #f59e0b; }
+
+    .star-rating label:hover { transform: scale(1.12); }
+
+    .star-rating input:focus-visible + label {
+      outline: 2px solid var(--primary);
+      border-radius: 4px;
+    }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .consent input { margin-top: 4px; accent-color: var(--primary); }
+
+    .review-submit {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .review-submit:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+
+    .form-message {
+      display: none;
+      margin-top: 16px;
+      padding: 13px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .form-message.success { display: block; color: #166534; background: #f0fdf4; border: 1px solid #bbf7d0; }
+    .form-message.error { display: block; color: #991b1b; background: #fef2f2; border: 1px solid #fecaca; }
+
+    .hp-field { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
 
     /* CTA */
     .cta-section { padding: 70px 0; }
@@ -785,6 +904,8 @@
       .portfolio-card.featured .portfolio-body { padding: 24px; }
       .why-grid { gap: 30px; }
       .why-box { padding: 28px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .review-form-wrap { padding: 24px 20px; }
       .cta { padding: 40px 22px; }
       .footer-inner { flex-direction: column; text-align: center; }
     }
@@ -1132,15 +1253,15 @@
         <div class="section-head">
           <div class="label">Reviews</div>
           <h2>What our clients say.</h2>
-          <p>Honest feedback from the businesses we've worked with.</p>
+          <p>Honest feedback from the businesses we’ve worked with.</p>
         </div>
 
         <div class="reviews-grid">
 
-          <!-- REVIEW 1: replace the text, name and business with a REAL client review -->
+          <!-- REVIEW 1: replace with a REAL approved review -->
           <article class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">“Paste your client's real review here. Ask them to send it on WhatsApp, then copy their words.”</p>
+            <p class="review-text">“Paste an approved client review here.”</p>
             <div class="review-author">
               <div class="review-avatar">W</div>
               <div>
@@ -1150,10 +1271,10 @@
             </div>
           </article>
 
-          <!-- REVIEW 2: replace with a real review -->
+          <!-- REVIEW 2: replace with a real approved review -->
           <article class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">“Paste your second client's real review here.”</p>
+            <p class="review-text">“Paste an approved client review here.”</p>
             <div class="review-author">
               <div class="review-avatar">C</div>
               <div>
@@ -1163,10 +1284,10 @@
             </div>
           </article>
 
-          <!-- REVIEW 3: replace with a real review -->
+          <!-- REVIEW 3: replace with a real approved review -->
           <article class="review-card">
             <div class="review-stars">★★★★★</div>
-            <p class="review-text">“Paste your third client's real review here.”</p>
+            <p class="review-text">“Paste an approved client review here.”</p>
             <div class="review-author">
               <div class="review-avatar">C</div>
               <div>
@@ -1178,9 +1299,56 @@
 
         </div>
 
-        <div class="reviews-cta">
-          <p>Worked with us? We'd love to hear your feedback.</p>
-          <a class="btn btn-secondary" href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%20would%20like%20to%20share%20my%20review.">Share Your Review →</a>
+        <!-- Review submission form -->
+        <div class="review-form-wrap" id="write-review">
+          <h3>Write a Review</h3>
+          <p>Worked with us? Share your experience — it takes less than a minute.</p>
+
+          <form id="reviewForm" action="https://formsubmit.co/ajax/panchgangaithub@gmail.com" method="POST">
+
+            <!-- FormSubmit settings -->
+            <input type="hidden" name="_subject" value="New website review - Panchganga IT">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <!-- Spam trap: real people never see or fill this -->
+            <input type="text" name="_honey" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="rv-name">Your Name *</label>
+                <input type="text" id="rv-name" name="Name" placeholder="e.g. Rahul Patil" required maxlength="60">
+              </div>
+              <div class="form-group">
+                <label for="rv-business">Business Name &amp; Location *</label>
+                <input type="text" id="rv-business" name="Business" placeholder="e.g. Wadkile Abhyasika, Gangakhed" required maxlength="80">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Your Rating *</label>
+              <div class="star-rating">
+                <input type="radio" id="star5" name="Rating" value="5 stars" required><label for="star5" title="5 stars">★</label>
+                <input type="radio" id="star4" name="Rating" value="4 stars"><label for="star4" title="4 stars">★</label>
+                <input type="radio" id="star3" name="Rating" value="3 stars"><label for="star3" title="3 stars">★</label>
+                <input type="radio" id="star2" name="Rating" value="2 stars"><label for="star2" title="2 stars">★</label>
+                <input type="radio" id="star1" name="Rating" value="1 star"><label for="star1" title="1 star">★</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="rv-text">Your Review *</label>
+              <textarea id="rv-text" name="Review" placeholder="Tell us about your experience working with Panchganga IT…" required minlength="15" maxlength="600"></textarea>
+            </div>
+
+            <label class="consent">
+              <input type="checkbox" name="Permission to display" value="Yes" required>
+              <span>I agree that my name and review may be displayed on this website.</span>
+            </label>
+
+            <button type="submit" class="btn btn-primary review-submit" id="reviewSubmit">Submit Review →</button>
+
+            <div class="form-message" id="reviewMessage" role="status" aria-live="polite"></div>
+          </form>
         </div>
       </div>
     </section>
@@ -1251,6 +1419,47 @@
      href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%20would%20like%20to%20discuss%20a%20project.">
     ☎
   </a>
+
+  <script>
+    // Review form: sends the review to your email without leaving the page
+    (function () {
+      var form = document.getElementById('reviewForm');
+      var btn = document.getElementById('reviewSubmit');
+      var msg = document.getElementById('reviewMessage');
+      if (!form) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        msg.className = 'form-message';
+        msg.textContent = '';
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Request failed');
+          return res.json();
+        })
+        .then(function () {
+          form.reset();
+          msg.className = 'form-message success';
+          msg.textContent = 'Thank you! Your review has been submitted. It will appear on the website after we check it.';
+        })
+        .catch(function () {
+          msg.className = 'form-message error';
+          msg.textContent = 'Sorry, something went wrong. Please try again in a moment.';
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.textContent = 'Submit Review →';
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
