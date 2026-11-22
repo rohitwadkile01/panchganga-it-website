@@ -427,6 +427,41 @@
       box-shadow: var(--shadow);
     }
 
+    /* Featured (live client project) card */
+    .portfolio-card.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+    }
+
+    .portfolio-card.featured .mockup { height: auto; min-height: 230px; }
+
+    .portfolio-card.featured .portfolio-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 34px;
+    }
+
+    .portfolio-card.featured .portfolio-body h3 { font-size: 24px; }
+
+    .portfolio-tag.live {
+      color: #047857;
+      background: #ecfdf5;
+    }
+
+    .mockup-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .mockup-pills span {
+      font-size: 10px;
+      font-weight: 700;
+      color: #047857;
+      background: #ecfdf5;
+      padding: 4px 9px;
+      border-radius: 999px;
+    }
+
     .mockup { height: 186px; background: #f1f5f9; }
 
     .mockup-bar {
@@ -741,6 +776,9 @@
       h1 { letter-spacing: -1.5px; }
       section { padding: 65px 0; }
       .service-grid, .process-grid, .contact-grid, .portfolio-grid, .who-grid { grid-template-columns: 1fr; }
+      .portfolio-card.featured { grid-template-columns: 1fr; }
+      .portfolio-card.featured .mockup { min-height: 200px; }
+      .portfolio-card.featured .portfolio-body { padding: 24px; }
       .why-grid { gap: 30px; }
       .why-box { padding: 28px; }
       .cta { padding: 40px 22px; }
@@ -929,10 +967,35 @@
         <div class="section-head">
           <div class="label">Our Work</div>
           <h2>See what we can build for you.</h2>
-          <p>A few sample projects showing the kind of results a small business can expect.</p>
+          <p>Live client work and sample projects showing the kind of results a small business can expect.</p>
         </div>
 
         <div class="portfolio-grid">
+
+          <!-- Live client project: Wadkile Abhyasika -->
+          <article class="portfolio-card featured">
+            <div class="mockup">
+              <div class="mockup-bar">
+                <span class="mockup-dot"></span><span class="mockup-dot"></span><span class="mockup-dot"></span>
+              </div>
+              <div class="mockup-body">
+                <div class="mockup-nav-line"></div>
+                <div class="mockup-hero" style="background:linear-gradient(135deg,#0f766e,#059669);"><span>Wadkile Abhyasika</span></div>
+                <div class="mockup-pills">
+                  <span>AC / Non-AC</span>
+                  <span>WiFi</span>
+                  <span>8 AM – 11 PM</span>
+                </div>
+              </div>
+            </div>
+            <div class="portfolio-body">
+              <span class="portfolio-tag live">LIVE CLIENT PROJECT</span>
+              <h3>Wadkile Abhyasika</h3>
+              <p class="portfolio-sub">Study Point & Reading Library Website — Gangakhed</p>
+              <p>A complete website for a study point and reading library — facilities, pricing, contact details and an online student registration form, all mobile-friendly.</p>
+              <a class="portfolio-link" href="https://wadkile-abhyasika.vercel.app" target="_blank" rel="noopener">Visit the live website →</a>
+            </div>
+          </article>
 
           <article class="portfolio-card">
             <div class="mockup">
@@ -950,7 +1013,7 @@
               <h3>Spice Route Kitchen</h3>
               <p class="portfolio-sub">Restaurant Website Demo</p>
               <p>Online menu, WhatsApp booking, and a mobile-friendly design — the kind of site we build for restaurants.</p>
-              <a class="portfolio-link" href="demo-restaurant.html" target="_blank">View Demo →</a>
+              <a class="portfolio-link" href="demo-restaurant.html" target="_blank" rel="noopener">View Demo →</a>
             </div>
           </article>
 
@@ -978,7 +1041,7 @@
               <span class="portfolio-tag">SAMPLE PRODUCT</span>
               <h3>Vantage — Sales Dashboard</h3>
               <p>A live Power BI–style report with real filters, trend charts, and drill-down visuals — built so owners get answers, not spreadsheets.</p>
-              <a class="portfolio-link" href="demo-dashboard.html" target="_blank">Open the live report →</a>
+              <a class="portfolio-link" href="demo-dashboard.html" target="_blank" rel="noopener">Open the live report →</a>
             </div>
           </article>
 
@@ -1016,7 +1079,7 @@
               <span class="portfolio-tag">SAMPLE PRODUCT</span>
               <h3>Relay — Automated Reporting</h3>
               <p>A packaged product with its own landing page and a working live demo — reads a daily export and turns it into a report automatically.</p>
-              <a class="portfolio-link" href="demo-automation.html" target="_blank">Open the live product →</a>
+              <a class="portfolio-link" href="demo-automation.html" target="_blank" rel="noopener">Open the live product →</a>
             </div>
           </article>
 
