@@ -580,6 +580,78 @@
     .step h3 { color: var(--dark); margin-bottom: 7px; font-size: 17px; }
     .step p { color: var(--muted); font-size: 13px; }
 
+    /* Reviews */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .review-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 5px 22px rgba(15,23,42,.04);
+      display: flex;
+      flex-direction: column;
+      transition: .2s ease;
+    }
+
+    .review-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .review-stars {
+      color: #f59e0b;
+      font-size: 17px;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .review-text {
+      color: var(--text);
+      font-size: 14.5px;
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 22px;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .review-avatar {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #eff6ff;
+      color: var(--primary);
+      font-weight: 850;
+    }
+
+    .review-author h4 { color: var(--dark); font-size: 15px; line-height: 1.2; }
+    .review-author small { color: var(--muted); font-size: 12.5px; }
+
+    .reviews-cta {
+      text-align: center;
+      margin-top: 34px;
+    }
+
+    .reviews-cta p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
     /* CTA */
     .cta-section { padding: 70px 0; }
 
@@ -686,22 +758,28 @@
 
     .whatsapp:hover { transform: scale(1.06); }
 
+    /* Keep section titles from hiding under the sticky navbar */
+    section[id] { scroll-margin-top: 74px; }
+
     @media (max-width: 900px) {
       .hero-grid, .why-grid { grid-template-columns: 1fr; }
       .service-grid, .portfolio-grid, .who-grid { grid-template-columns: 1fr 1fr; }
       .process-grid { grid-template-columns: 1fr 1fr; }
+      .reviews-grid { grid-template-columns: 1fr 1fr; }
+      .review-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
       .hero { padding-top: 65px; }
     }
 
     @media (max-width: 680px) {
       .nav-links { display: none; }
       .nav-inner { min-height: 65px; }
+      section[id] { scroll-margin-top: 65px; }
       .brand { font-size: 14px; }
       .brand-mark { width: 36px; height: 36px; }
       .hero { padding: 60px 0; }
       h1 { letter-spacing: -1.5px; }
       section { padding: 65px 0; }
-      .service-grid, .process-grid, .contact-grid, .portfolio-grid, .who-grid { grid-template-columns: 1fr; }
+      .service-grid, .process-grid, .contact-grid, .portfolio-grid, .who-grid, .reviews-grid { grid-template-columns: 1fr; }
       .portfolio-card.featured { grid-template-columns: 1fr; }
       .portfolio-card.featured .shot img { min-height: 200px; }
       .portfolio-card.featured .portfolio-body { padding: 24px; }
@@ -730,7 +808,7 @@
         <a href="#who-we-help">Solutions</a>
         <a href="#portfolio">Our Work</a>
         <a href="#process">Process</a>
-        <a href="#process">Review</a>
+        <a href="#reviews">Review</a>
         <a href="#contact">Contact</a>
         <a class="nav-cta" href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%20would%20like%20a%20free%20consultation.">Get Free Consultation</a>
       </div>
@@ -1047,6 +1125,66 @@
         </div>
       </div>
     </section>
+
+    <!-- ============ REVIEWS SECTION ============ -->
+    <section id="reviews" class="reviews">
+      <div class="container">
+        <div class="section-head">
+          <div class="label">Reviews</div>
+          <h2>What our clients say.</h2>
+          <p>Honest feedback from the businesses we've worked with.</p>
+        </div>
+
+        <div class="reviews-grid">
+
+          <!-- REVIEW 1: replace the text, name and business with a REAL client review -->
+          <article class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">“Paste your client's real review here. Ask them to send it on WhatsApp, then copy their words.”</p>
+            <div class="review-author">
+              <div class="review-avatar">W</div>
+              <div>
+                <h4>Client Name</h4>
+                <small>Wadkile Abhyasika, Gangakhed</small>
+              </div>
+            </div>
+          </article>
+
+          <!-- REVIEW 2: replace with a real review -->
+          <article class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">“Paste your second client's real review here.”</p>
+            <div class="review-author">
+              <div class="review-avatar">C</div>
+              <div>
+                <h4>Client Name</h4>
+                <small>Business Name, Location</small>
+              </div>
+            </div>
+          </article>
+
+          <!-- REVIEW 3: replace with a real review -->
+          <article class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">“Paste your third client's real review here.”</p>
+            <div class="review-author">
+              <div class="review-avatar">C</div>
+              <div>
+                <h4>Client Name</h4>
+                <small>Business Name, Location</small>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="reviews-cta">
+          <p>Worked with us? We'd love to hear your feedback.</p>
+          <a class="btn btn-secondary" href="https://wa.me/919322321364?text=Hi%20Panchganga%20IT%20Services%2C%20I%20would%20like%20to%20share%20my%20review.">Share Your Review →</a>
+        </div>
+      </div>
+    </section>
+    <!-- ============ END REVIEWS SECTION ============ -->
 
     <section class="audit-section">
       <div class="container">
